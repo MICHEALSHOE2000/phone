@@ -3,457 +3,367 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>GadgetHub — Premium Gadget Dealer (Prototype)</title>
-  <meta name="description" content="GadgetHub — Premium phone dealer. iPhone, Samsung, Huawei, Infinix, Xiaomi, OnePlus, Tecno, Oppo. Contact via WhatsApp." />
-  <!-- Google fonts -->
+  <title>TobbIe Gadgets — Phones, Consoles & Accessories</title>
+  <meta name="description" content="TobbIe Gadgets — New & used phones, consoles, laptops and accessories. Message us on WhatsApp to buy." />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-  <!-- main stylesheet -->
-  <link rel="stylesheet" href="style.css">
+  <style>
+  /* === Embedded/updated CSS (mobile-first) === */
+  :root{--bg:#fff;--muted-bg:#f7f8fa;--panel:#fff;--text:#111827;--muted-text:#51606a;--accent:#25D366;--accent-600:#1dbb53;--shadow:0 8px 24px rgba(16,24,40,0.06);--radius:12px;--container-max:1100px;}
+  *{box-sizing:border-box;margin:0;padding:0}html,body{height:100%;overflow-x:hidden}body{font-family:'Inter',system-ui,Arial;background:var(--bg);color:var(--text);line-height:1.5;font-size:16px;-webkit-font-smoothing:antialiased}
+  .container{max-width:var(--container-max);margin:0 auto;padding:0 12px}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;height:auto;display:block}
+  .brand{display:flex;align-items:center;gap:8px}
+  .brand svg{border-radius:8px}
+  header.site-header{position:sticky;top:0;z-index:1200;background:rgba(255,255,255,0.9);backdrop-filter:blur(6px);border-bottom:1px solid rgba(16,24,40,0.04)}
+  .header-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 0}
+  .brand-name{font-weight:800;font-size:1.02rem}
+  .main-nav ul{display:flex;gap:12px;list-style:none}
+  .main-nav a{padding:8px;font-weight:700;color:var(--muted-text)}
+  .mobile-toggle{display:block;background:none;border:none;font-size:1.2rem}
+  .hero{padding:28px 0;background:linear-gradient(180deg,var(--muted-bg)0%,var(--bg)100%)}
+  .hero-inner{display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center}
+  .hero h1{font-size:1.6rem;line-height:1.05}
+  .hero-sub{color:var(--muted-text);max-width:640px}
+  .hero-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;font-weight:700;font-size:0.95rem}
+  .btn.primary{background:var(--accent);color:#fff}
+  .btn.ghost{background:transparent;border:1px solid rgba(16,24,40,0.06)}
+  .sticky-cta{position:fixed;left:12px;right:12px;bottom:12px;background:linear-gradient(90deg,var(--accent),var(--accent-600));padding:10px;border-radius:12px;z-index:2000;display:flex;justify-content:center}
+  .sticky-cta a{color:#fff;font-weight:800}
+  /* brands/products grid */
+  .brands{padding:14px 0}
+  .brand-block{margin-bottom:16px}
+  .brand-header h3{font-size:1.02rem}
+  .brand-slider{display:flex;align-items:center;gap:8px;margin:8px 0}
+  .slider-track{display:flex;overflow-x:auto;gap:10px;padding:6px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+  .slider-track::-webkit-scrollbar{height:8px}
+  .slide{min-width:calc(100% - 40px);flex:0 0 calc(100% - 40px);border-radius:10px;overflow:hidden;scroll-snap-align:start;box-shadow:var(--shadow)}
+  .slide img{width:100%;height:180px;object-fit:cover}
+  .brand-products{display:grid;gap:10px}
+  .product-card{display:flex;gap:10px;align-items:center;background:var(--panel);padding:10px;border-radius:10px;box-shadow:var(--shadow)}
+  .product-card img{width:110px;height:84px;object-fit:cover;border-radius:8px;flex-shrink:0}
+  .product-meta h4{font-size:0.98rem;margin-bottom:6px}
+  .product-meta .specs{color:var(--muted-text);font-weight:600;margin-bottom:6px}
+  .product-meta .price{font-weight:900;margin-bottom:8px}
+  .filter-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}
+  .filter-bar select,.filter-bar input[type=text],.filter-bar input[type=range]{padding:8px;border-radius:10px;border:1px solid rgba(16,24,40,0.06)}
+  #products-grid{display:grid;grid-template-columns:1fr;gap:10px}
+  /* testimonials */
+  .testimonials{padding:14px;background:var(--muted-bg);border-radius:12px;margin-top:12px}
+  .testimonial{display:flex;gap:10px;align-items:flex-start;background:var(--panel);padding:10px;border-radius:10px}
+  .testimonial img {
+  width: 100%;          /* fill the container */
+  max-width: 320px;     /* keep them readable but not too big */
+  border-radius: 12px;  /* rounded corners */
+  margin-bottom: 8px;
+  display: block;
+}
+
+  /* modal */
+  .modal{display:none;position:fixed;inset:0;background:rgba(2,6,23,0.5);align-items:center;justify-content:center;padding:12px;z-index:1600}
+  .modal-inner{background:var(--panel);padding:12px;border-radius:12px;max-width:920px;width:100%;box-shadow:0 28px 80px rgba(0,0,0,0.5)}
+  .modal-body{display:flex;gap:12px;flex-wrap:wrap}
+  .modal-img{width:320px;max-width:100%;height:auto;object-fit:cover;border-radius:8px}
+  /* responsive */
+  @media(min-width:600px){.slide{min-width:260px;flex:0 0 260px}.hero-inner{flex-direction:row;text-align:left;align-items:center}.brand-products{grid-template-columns:repeat(2,1fr)}#products-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(min-width:1000px){#products-grid{grid-template-columns:repeat(3,1fr)}.brand-products{grid-template-columns:repeat(3,1fr)}.hero h1{font-size:2.2rem}}
+  /* small helpers */
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  </style>
 </head>
-<!-- ================= STICKY CTA BAR ================= -->
-<div class="sticky-cta">
-    <a href="https://wa.me/2347034774672?text=Hello%20I%20want%20the%20best%20price%20for%20a%20gadget" 
-       target="_blank" rel="noopener">
-      💬 Contact Us Now for Your Best Price
-    </a>
-  </div>
-  
 <body>
-  <!-- ================= HEADER ================= -->
+  <div class="sticky-cta"><a href="https://wa.me/2347034774672?text=Hello%20TobbIe%20Gadgets" target="_blank" rel="noopener">💬 Message TobbIe Gadgets on WhatsApp</a></div>
   <header class="site-header" role="banner">
     <div class="container header-inner">
       <a class="brand" href="#">
-        <svg width="36" height="36" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#25D366"></rect></svg>
-        <span class="brand-name">GadgetHub</span>
+        <svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#25D366"></rect></svg>
+        <span class="brand-name">TobbIe Gadgets</span>
       </a>
-
-      <nav class="main-nav" role="navigation" aria-label="Main navigation">
+      <nav class="main-nav" role="navigation" aria-label="Main">
         <ul>
           <li><a href="#hero">Home</a></li>
           <li><a href="#brands">Brands</a></li>
-          <li><a href="#catalog">Products</a></li>
-          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#catalog">Catalog</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
-
       <div class="header-ctas">
-        <a class="call-cta" href="tel:+2347034774672" aria-label="Call 07034774672">📞 07034774672</a>
-        <a class="wa-cta" href="https://wa.me/2347034774672" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">💬 WhatsApp</a>
+        <a class="btn ghost" href="tel:+2347034774672">📞 07034774672</a>
+        <a class="btn ghost" href="https://wa.me/2347034774672">💬 WhatsApp</a>
+        <button class="mobile-toggle" aria-expanded="false" aria-label="Open menu">☰</button>
       </div>
-
-      <button class="mobile-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
     </div>
   </header>
 
-  <!-- ================= HERO ================= -->
   <section id="hero" class="hero">
     <div class="container hero-inner">
       <div class="hero-content">
-        <h1>Affordable Gadget — All in One Place</h1>
-        <p class="hero-sub">
-          Premium Phone Dealer — from <strong>Samsung Galaxy</strong> to the latest <strong>iPhones</strong>, <strong>Huawei</strong>, <strong>Infinix</strong>, <strong>Xiaomi</strong> and more.
-        </p>
-
-        <ul class="hero-stats" aria-hidden="true">
-          <li><strong>50+</strong> Models</li>
-          <li><strong>5k+</strong> Happy customers</li>
-          <li><strong>24/7</strong> Support</li>
-        </ul>
-
+        <h1>Buy new & used gadgets — fast, trusted, local</h1>
+        <p class="hero-sub">Phones (iPhone, Samsung, Pixel, Huawei, Redmi, Vivo), consoles (PS3→PS5, Nintendo, Xbox), laptops, tablets, watches and accessories — message us on WhatsApp to secure stock and prices.</p>
         <div class="hero-actions">
-          <a class="btn primary" href="https://wa.me/2347034774672" target="_blank" rel="noopener">💬 Chat on WhatsApp</a>
-          <a class="btn ghost" href="#brands">Browse Brands</a>
+          <a class="btn primary" href="https://wa.me/2347034774672?text=Hello%20I%27m%20interested%20in%20a%20gadget" target="_blank" rel="noopener">💬 Chat on WhatsApp</a>
+          <a class="btn ghost" href="#catalog">Browse catalog</a>
         </div>
       </div>
-
       <div class="hero-image" aria-hidden="true">
-        <!-- illustrative device row (placeholder) -->
-        <img src="img/tob.jpg" alt="">
+        <img src="img/tob.jpg" alt="TobbIe Gadgets preview">
       </div>
     </div>
   </section>
 
-  <!-- ================= BRANDS (each brand is a section) ================= -->
-  <main id="main">
-    <section id="brands" class="brands container">
-      <h2 class="section-title">Premium Brands We Carry</h2>
-      <p class="section-sub">Choose from the world's leading smartphone manufacturers</p>
+  <main class="container" id="main">
+    <section id="catalog" class="catalog">
+      <h2 class="section-title">Catalog</h2>
+      <p class="section-sub">Search, <b></b>Find your gadget faster – filter by brand, storage & condition.</b> Use the search box for model names or keywords (e.g. "iPhone 16 256GB", "PS5 disc/used").</p>
 
-      <!-- Each brand block follows the same markup for consistency and maintainability -->
-      <!-- ======= BRAND: iPhone ======= -->
-      <article class="brand-block" id="brand-iphone" aria-labelledby="brand-iphone-title">
-        <header class="brand-header">
-          <h3 id="brand-iphone-title">iPhones</h3>
-          <p class="brand-lead">Experience revolutionary iPhones from X to 17 Pro Max — <strong>15+ models available</strong>.</p>
-        </header>
-
-        <!-- slider (images) -->
-        <div class="brand-slider" data-slider="iphone-slider">
-          <button class="slider-btn prev" data-action="prev" aria-label="Previous">‹</button>
-          <div class="slider-track" id="iphone-slider" role="list">
-            <!-- real images (Unsplash) used here as public placeholders; replace with your own images if you want -->
-            <div class="slide" role="listitem"><img src="img/iphone16..jpeg" alt="iPhone 16 Pro Max" data-product='{"id":"iphone-16pm","name":"iPhone 16 Pro Max","price":"₦1,500,000","ram":"8GB","storage":"256GB","battery":"5000mAh"}'></div>
-            <div class="slide" role="listitem"><img src="https://images.unsplash.com/photo-1556656793-08538906a9f8?auto=format&fit=crop&w=800&q=60" alt="iPhone 15" data-product='{"id":"iphone-15","name":"iPhone 15","price":"₦950,000","ram":"6GB","storage":"128GB","battery":"4200mAh"}'></div>
-            <div class="slide" role="listitem"><img src="img/normal.jpeg" alt="iPhone X" data-product='{"id":"iphone-x","name":"iPhone X","price":"₦350,000","ram":"4GB","storage":"64GB","battery":"3100mAh"}'></div>
-          </div>
-          <button class="slider-btn next" data-action="next" aria-label="Next">›</button>
-        </div>
-
-        <!-- Featured products grid for the brand (card layout) -->
-        <div class="brand-products">
-            <article class="product-card" data-product='{"id":"iphone-16pm","name":"iPhone 16 Pro Max","price":"₦1,500,000","ram":"8GB","storage":"256GB","battery":"5000mAh","img":"https://images.unsplash.com/photo-1512499617640-c2f99912a1b8?auto=format&fit=crop&w=900&q=60"}' data-ram="8GB" data-storage="256GB">
-                <img src="img/17.webp" alt="iPhone 16 Pro Max" loading="lazy">
-                <div class="product-meta">
-                  <h4>iPhone 17 Pro Max</h4>
-                  <p class="specs">iPhone • 16GB • 256GB</p>
-                  <p class="price">₦2,500,000</p>
-                  <div class="product-actions">
-                    <button class="btn small" data-open="iphone-16pm">Details</button>
-                    <a class="btn small wa" href="https://wa.me/2347034774672?text=I'm%20interested%20in%20iPhone%2016%20Pro%20Max" target="_blank" rel="noopener">💬 WhatsApp</a>
-                  </div>
-                </div>
-              </article>
-              
-          <!-- two more sample cards -->
-          <article class="product-card">
-            <img src="https://images.unsplash.com/photo-1556656793-08538906a9f8?auto=format&fit=crop&w=600&q=60" alt="iPhone 15" loading="lazy">
-            <div class="product-meta">
-              <h4>iPhone 15</h4>
-              <p class="specs">6GB • 128GB • 48MP</p>
-              <p class="price">₦950,000</p>
-              <div class="product-actions">
-                <button class="btn small" data-open="iphone-15">Details</button>
-                <a class="btn small wa" href="https://wa.me/2347034774672?text=I'm%20interested%20in%20iPhone%2015" target="_blank" rel="noopener">💬 WhatsApp</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="product-card">
-            <img src="https://images.unsplash.com/photo-1603898037225-2c7123968e5a?auto=format&fit=crop&w=600&q=60" alt="iPhone X" loading="lazy">
-            <div class="product-meta">
-              <h4>iPhone X</h4>
-              <p class="specs">4GB • 64GB • 12MP</p>
-              <p class="price">₦350,000</p>
-              <div class="product-actions">
-                <button class="btn small" data-open="iphone-x">Details</button>
-                <a class="btn small wa" href="https://wa.me/2347034774672?text=I'm%20interested%20in%20iPhone%20X" target="_blank" rel="noopener">💬 WhatsApp</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </article>
-
-      <!-- ======= BRAND: Samsung ======= -->
-      <article class="brand-block" id="brand-samsung" aria-labelledby="brand-samsung-title">
-        <header class="brand-header">
-          <h3 id="brand-samsung-title">Samsung</h3>
-          <p class="brand-lead">Cutting-edge Samsung Galaxy models with powerful performance — <strong>20+ models available</strong>.</p>
-        </header>
-
-        <div class="brand-slider" data-slider="samsung-slider">
-          <button class="slider-btn prev" data-action="prev" aria-label="Previous">‹</button>
-          <div class="slider-track" id="samsung-slider" role="list">
-            <div class="slide" role="listitem"><img src="https://images.unsplash.com/photo-1512496015851-a741b8d1f5b0?auto=format&fit=crop&w=800&q=60" alt="Samsung S24 Ultra" data-product='{"id":"samsung-s24","name":"Galaxy S24 Ultra","price":"₦1,100,000","ram":"12GB","storage":"512GB","battery":"5000mAh"}'></div>
-            <div class="slide" role="listitem"><img src="https://images.unsplash.com/photo-1570623222316-83e6d4a4f466?auto=format&fit=crop&w=800&q=60" alt="Samsung Fold" data-product='{"id":"samsung-fold","name":"Galaxy Fold 5","price":"₦1,400,000","ram":"12GB","storage":"512GB","battery":"4400mAh"}'></div>
-          </div>
-          <button class="slider-btn next" data-action="next" aria-label="Next">›</button>
-        </div>
-
-        <div class="brand-products">
-          <article class="product-card">
-            <img src="https://images.unsplash.com/photo-1512496015851-a741b8d1f5b0?auto=format&fit=crop&w=600&q=60" alt="Samsung S24 Ultra" loading="lazy">
-            <div class="product-meta">
-              <h4>Galaxy S24 Ultra</h4>
-              <p class="specs">12GB • 512GB • 200MP</p>
-              <p class="price">₦1,100,000</p>
-              <div class="product-actions">
-                <button class="btn small" data-open="samsung-s24">Details</button>
-                <a class="btn small wa" href="https://wa.me/2347034774672?text=I'm%20interested%20in%20Galaxy%20S24%20Ultra" target="_blank" rel="noopener">💬 WhatsApp</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </article>
-
-      <!-- ======= BRAND: Huawei ======= -->
-      <article class="brand-block" id="brand-huawei" aria-labelledby="brand-huawei-title">
-        <header class="brand-header">
-          <h3 id="brand-huawei-title">Huawei</h3>
-          <p class="brand-lead">Innovative Huawei devices with elegant design — <strong>10+ models available</strong>.</p>
-        </header>
-
-        <div class="brand-slider" data-slider="huawei-slider">
-          <button class="slider-btn prev" data-action="prev" aria-label="Previous">‹</button>
-          <div class="slider-track" id="huawei-slider" role="list">
-            <div class="slide" role="listitem"><img src="https://images.unsplash.com/photo-1616446101542-5c2201f5a6d4?auto=format&fit=crop&w=800&q=60" alt="Huawei P60" data-product='{"id":"huawei-p60","name":"Huawei P60","price":"₦500,000","ram":"8GB","storage":"256GB","battery":"4700mAh"}'></div>
-          </div>
-          <button class="slider-btn next" data-action="next" aria-label="Next">›</button>
-        </div>
-
-        <div class="brand-products">
-          <article class="product-card">
-            <img src="https://images.unsplash.com/photo-1616446101542-5c2201f5a6d4?auto=format&fit=crop&w=600&q=60" alt="Huawei P60" loading="lazy">
-            <div class="product-meta">
-              <h4>Huawei P60</h4>
-              <p class="specs">8GB • 256GB • 50MP</p>
-              <p class="price">₦500,000</p>
-              <div class="product-actions">
-                <button class="btn small" data-open="huawei-p60">Details</button>
-                <a class="btn small wa" href="https://wa.me/2347034774672?text=I'm%20interested%20in%20Huawei%20P60" target="_blank" rel="noopener">💬 WhatsApp</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </article>
-
-      <!-- ======= BRAND: Infinix ======= -->
-      <article class="brand-block" id="brand-infinix" aria-labelledby="brand-infinix-title">
-        <header class="brand-header">
-          <h3 id="brand-infinix-title">Infinix</h3>
-          <p class="brand-lead">Affordable Infinix phones with strong battery life — <strong>25+ models available</strong>.</p>
-        </header>
-
-        <div class="brand-slider" data-slider="infinix-slider">
-          <button class="slider-btn prev" data-action="prev" aria-label="Previous">‹</button>
-          <div class="slider-track" id="infinix-slider" role="list">
-            <div class="slide" role="listitem"><img src="https://images.unsplash.com/photo-1610465297071-7ec3c5c6f3d4?auto=format&fit=crop&w=800&q=60" alt="Infinix Note 30" data-product='{"id":"infinix-note30","name":"Infinix Note 30","price":"₦300,000","ram":"8GB","storage":"256GB","battery":"6000mAh"}'></div>
-          </div>
-          <button class="slider-btn next" data-action="next" aria-label="Next">›</button>
-        </div>
-
-        <div class="brand-products">
-          <article class="product-card">
-            <img src="https://images.unsplash.com/photo-1610465297071-7ec3c5c6f3d4?auto=format&fit=crop&w=600&q=60" alt="Infinix Note 30" loading="lazy">
-            <div class="product-meta">
-              <h4>Infinix Note 30</h4>
-              <p class="specs">8GB • 256GB • 108MP</p>
-              <p class="price">₦300,000</p>
-              <div class="product-actions">
-                <button class="btn small" data-open="infinix-note30">Details</button>
-                <a class="btn small wa" href="https://wa.me/2347034774672?text=I'm%20interested%20in%20Infinix%20Note%2030" target="_blank" rel="noopener">💬 WhatsApp</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </article>
-
-      <!-- ======= BRAND: Xiaomi ======= -->
-      <article class="brand-block" id="brand-xiaomi" aria-labelledby="brand-xiaomi-title">
-        <header class="brand-header">
-          <h3 id="brand-xiaomi-title">Xiaomi</h3>
-          <p class="brand-lead">Xiaomi flagships offering great value — <strong>15+ models available</strong>.</p>
-        </header>
-
-        <div class="brand-slider" data-slider="xiaomi-slider">
-          <button class="slider-btn prev" data-action="prev" aria-label="Previous">‹</button>
-          <div class="slider-track" id="xiaomi-slider" role="list">
-            <div class="slide" role="listitem"><img src="https://images.unsplash.com/photo-1606813902846-6a7b70f5d9eb?auto=format&fit=crop&w=800&q=60" alt="Xiaomi 13 Pro" data-product='{"id":"xiaomi-13pro","name":"Xiaomi 13 Pro","price":"₦700,000","ram":"12GB","storage":"256GB","battery":"4820mAh"}'></div>
-          </div>
-          <button class="slider-btn next" data-action="next" aria-label="Next">›</button>
-        </div>
-
-        <div class="brand-products">
-          <article class="product-card">
-            <img src="https://images.unsplash.com/photo-1606813902846-6a7b70f5d9eb?auto=format&fit=crop&w=600&q=60" alt="Xiaomi 13 Pro" loading="lazy">
-            <div class="product-meta">
-              <h4>Xiaomi 13 Pro</h4>
-              <p class="specs">12GB • 256GB • 50MP</p>
-              <p class="price">₦700,000</p>
-              <div class="product-actions">
-                <button class="btn small" data-open="xiaomi-13pro">Details</button>
-                <a class="btn small wa" href="https://wa.me/2347034774672?text=I'm%20interested%20in%20Xiaomi%2013%20Pro" target="_blank" rel="noopener">💬 WhatsApp</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </article>
-
-      <!-- ======= BRAND: OnePlus ======= -->
-      <article class="brand-block" id="brand-oneplus" aria-labelledby="brand-oneplus-title">
-        <header class="brand-header">
-          <h3 id="brand-oneplus-title">OnePlus</h3>
-          <p class="brand-lead">Fast and smooth OnePlus devices — <strong>12+ models available</strong>.</p>
-        </header>
-
-        <div class="brand-slider" data-slider="oneplus-slider">
-          <button class="slider-btn prev" data-action="prev" aria-label="Previous">‹</button>
-          <div class="slider-track" id="oneplus-slider" role="list">
-            <div class="slide" role="listitem"><img src="https://images.unsplash.com/photo-1621597280313-9c76a8b3d3f9?auto=format&fit=crop&w=800&q=60" alt="OnePlus 11" data-product='{"id":"oneplus-11","name":"OnePlus 11","price":"₦650,000","ram":"12GB","storage":"256GB","battery":"5000mAh"}'></div>
-          </div>
-          <button class="slider-btn next" data-action="next" aria-label="Next">›</button>
-        </div>
-
-        <div class="brand-products">
-          <article class="product-card">
-            <img src="https://images.unsplash.com/photo-1621597280313-9c76a8b3d3f9?auto=format&fit=crop&w=600&q=60" alt="OnePlus 11" loading="lazy">
-            <div class="product-meta">
-              <h4>OnePlus 11</h4>
-              <p class="specs">12GB • 256GB • 50MP</p>
-              <p class="price">₦650,000</p>
-              <div class="product-actions">
-                <button class="btn small" data-open="oneplus-11">Details</button>
-                <a class="btn small wa" href="https://wa.me/2347034774672?text=I'm%20interested%20in%20OnePlus%2011" target="_blank" rel="noopener">💬 WhatsApp</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </article>
-
-      <!-- ======= BRAND: Tecno ======= -->
-      <article class="brand-block" id="brand-tecno" aria-labelledby="brand-tecno-title">
-        <header class="brand-header">
-          <h3 id="brand-tecno-title">Tecno</h3>
-          <p class="brand-lead">Designed for Nigeria — long battery life & value — <strong>18+ models available</strong>.</p>
-        </header>
-
-        <div class="brand-slider" data-slider="tecno-slider">
-          <button class="slider-btn prev" data-action="prev" aria-label="Previous">‹</button>
-          <div class="slider-track" id="tecno-slider" role="list">
-            <div class="slide" role="listitem"><img src="https://images.unsplash.com/photo-1630167459368-3b9c291b1b8b?auto=format&fit=crop&w=800&q=60" alt="Tecno Phantom X2" data-product='{"id":"tecno-x2","name":"Tecno Phantom X2","price":"₦420,000","ram":"12GB","storage":"256GB","battery":"5160mAh"}'></div>
-          </div>
-          <button class="slider-btn next" data-action="next" aria-label="Next">›</button>
-        </div>
-
-        <div class="brand-products">
-          <article class="product-card">
-            <img src="https://images.unsplash.com/photo-1630167459368-3b9c291b1b8b?auto=format&fit=crop&w=600&q=60" alt="Tecno Phantom X2" loading="lazy">
-            <div class="product-meta">
-              <h4>Tecno Phantom X2</h4>
-              <p class="specs">12GB • 256GB • 50MP</p>
-              <p class="price">₦420,000</p>
-              <div class="product-actions">
-                <button class="btn small" data-open="tecno-x2">Details</button>
-                <a class="btn small wa" href="https://wa.me/2347034774672?text=I'm%20interested%20in%20Tecno%20Phantom%20X2" target="_blank" rel="noopener">💬 WhatsApp</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </article>
-
-      <!-- ======= BRAND: Oppo ======= -->
-      <article class="brand-block" id="brand-oppo" aria-labelledby="brand-oppo-title">
-        <header class="brand-header">
-          <h3 id="brand-oppo-title">Oppo</h3>
-          <p class="brand-lead">Oppo smartphones known for camera innovation — <strong>14+ models available</strong>.</p>
-        </header>
-
-        <div class="brand-slider" data-slider="oppo-slider">
-          <button class="slider-btn prev" data-action="prev" aria-label="Previous">‹</button>
-          <div class="slider-track" id="oppo-slider" role="list">
-            <div class="slide" role="listitem"><img src="https://images.unsplash.com/photo-1523475496153-3d6cc5db4f5f?auto=format&fit=crop&w=800&q=60" alt="Oppo Reno" data-product='{"id":"oppo-reno","name":"Oppo Reno 10","price":"₦480,000","ram":"8GB","storage":"256GB","battery":"4500mAh"}'></div>
-          </div>
-          <button class="slider-btn next" data-action="next" aria-label="Next">›</button>
-        </div>
-
-        <div class="brand-products">
-          <article class="product-card">
-            <img src="https://images.unsplash.com/photo-1523475496153-3d6cc5db4f5f?auto=format&fit=crop&w=600&q=60" alt="Oppo Reno 10" loading="lazy">
-            <div class="product-meta">
-              <h4>Oppo Reno 10</h4>
-              <p class="specs">8GB • 256GB • 50MP</p>
-              <p class="price">₦480,000</p>
-              <div class="product-actions">
-                <button class="btn small" data-open="oppo-reno">Details</button>
-                <a class="btn small wa" href="https://wa.me/2347034774672?text=I'm%20interested%20in%20Oppo%20Reno%2010" target="_blank" rel="noopener">💬 WhatsApp</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </article>
-
-    </section>
-
-    <!-- ================= CATALOG (quick full grid) ================= -->
-    <section id="catalog" class="container catalog">
-      <h2 class="section-title">Browse More Products</h2>
-      <p class="section-sub">View our wider stock — click to message us on WhatsApp to buy.</p>
-
-      <div class="filter-bar">
-        <select id="brand-filter" aria-label="Filter by brand">
-          <option value="all">All Brands</option>
-          <!-- brand options will be populated by JS -->
-        </select>
-      
+      <div class="filter-bar" role="region" aria-label="Product filters">
+        <select id="brand-filter" aria-label="Filter by brand"><option value="all">All Brands</option></select>
+        <select id="condition-filter" aria-label="Condition"><option value="all">All Conditions</option><option value="new">New</option><option value="used">Used</option></select>
         <label for="price-filter" class="sr-only">Max price</label>
-        <input id="price-filter" type="range" min="10000" max="2000000" step="1000" value="2000000" aria-label="Max price">
-        <span id="price-value">Up to ₦2,000,000</span>
-      
-        <!-- RAM / Storage / Search — JS will insert selects dynamically after load -->
+        <input id="price-filter" type="range" min="10000" max="5000000" step="5000" value="5000000" aria-label="Max price">
+        <span id="price-value">Up to ₦5,000,000</span>
+        <select id="ram-filter" aria-label="RAM"><option value="all">All RAM</option></select>
+        <select id="storage-filter" aria-label="Storage"><option value="all">All Storage</option></select>
+        <input id="search-input" type="text" placeholder="Search model or keyword" aria-label="Search products">
       </div>
-      
 
-      <div class="products-grid products" id="products-grid" aria-live="polite"></div>
-      <div style="text-align:center"><button id="load-more" class="btn outline">Load more</button></div>
+      <div id="products-grid" aria-live="polite"></div>
+      <div style="text-align:center;margin-top:12px"><button id="load-more" class="btn ghost">Load more</button></div>
     </section>
 
-    <!-- ================= TESTIMONIALS ================= -->
-    <section id="testimonials" class="container testimonials">
-        <h2 class="section-title">What our customers say</h2>
+    <section id="brands" class="brands">
+      <h2 class="section-title">Popular categories</h2>
+      <p class="section-sub">Quick links to the items we move often — tap a product image to view details and message us on WhatsApp to reserve.</p>
+
+      <!-- Example brand block (repeatable) -->
+      <article class="brand-block" id="phones">
+        <header class="brand-header"><h3>Phones — New & Used</h3><p class="brand-lead">iPhone 17 series (brand new), iPhone X→16 (used), Xperia 1 III dual 512GB, Samsung (all series used & new), Google Pixel, Nokia, Redmi, Vivo, Huawei, Honor, ASUS ROG phones.</p></header>
+        <div class="brand-slider">
+          <button class="slider-btn prev" data-action="prev">‹</button>
+          <div class="slider-track" id="phones-slider">
+            <div class="slide"><img src="img/17.webp" alt="iPhone 17 Pro Max" data-product='{"name":"iPhone 17 Pro Max","brand":"iPhone","price":"₦2,500,000","ram":"16GB","storage":"512GB","img":"img:/17.webp"}'></div>
+            <div class="slide"><img src="img/xperia1.jpeg" alt="Xperia 1 III Dual 512GB" data-product='{"name":"Xperia 1 III Dual 512GB","brand":"Sony","price":"₦1,200,000","ram":"12GB","storage":"512GB","img":"https://via.placeholder.com/800x400?text=Xperia+1+III"}'></div>
+            <div class="slide"><img src="img/s24.jpeg" alt="Galaxy S24 Ultra" data-product='{"name":"Galaxy S24 Ultra","brand":"Samsung","price":"₦1,100,000","ram":"12GB","storage":"512GB","img":"https://via.placeholder.com/800x400?text=S24+Ultra"}'></div>
+          </div>
+          <button class="slider-btn next" data-action="next">›</button>
+        </div>
+
+        <div class="brand-products" id="brand-sample-products">
+          <!-- cards will be rendered by JS to keep single source of truth -->
+        </div>
+      </article>
+
+      <article class="brand-block" id="consoles">
+        <header class="brand-header"><h3>Games & Consoles</h3><p class="brand-lead">PS3 → PS5, PSP, PS Vita, Nintendo Switch, Xbox Series, handhelds and lots of used titles.</p></header>
+        <div class="brand-products" id="games-sample">
+        </div>
+      </article>
+    </section>
+
+    <section id="testimonials" class="testimonials">
+        <h2 class="section-title">Testimonials</h2>
         <div class="testimonial-list">
           <div class="testimonial">
-            <img src="https://via.placeholder.com/72" alt="Customer photo">
+            <img src="img/t1.jpg" alt="Chat screenshot from Aisha">
             <div>
               <div class="stars">★ ★ ★ ★ ★</div>
-              <p class="quote">"Amazing prices and quick delivery — highly recommend."</p>
-              <p class="meta">— Damilola, Lagos</p>
+              <p class="quote">"Fast replies and fair pricing — bought a Galaxy S22 used and it's solid."</p>
+              <p class="meta">— Aisha, Lekki</p>
             </div>
           </div>
           <div class="testimonial">
-            <img src="https://via.placeholder.com/72" alt="Customer photo">
+            <img src="img/t2.jpg" alt="Chat screenshot from Emeka">
             <div>
               <div class="stars">★ ★ ★ ★ ☆</div>
-              <p class="quote">"Great support on WhatsApp and authentic devices."</p>
-              <p class="meta">— Offiong, Abuja</p>
+              <p class="quote">"Reserved an iPhone 16 via WhatsApp and pickup was smooth."</p>
+              <p class="meta">— Emeka, Abuja</p>
             </div>
           </div>
-          <!-- add more testimonial blocks as needed -->
         </div>
-        <!-- controls inserted by JS -->
       </section>
       
-    <!-- ================= CONTACT ================= -->
-    <section id="contact" class="container contact">
-      <h2 class="section-title">Contact Us</h2>
-      <p class="section-sub">Prefer WhatsApp? Click the green button — or use the form below.</p>
 
-      <!-- Formspree form (replace YOUR_FORM_ID with your real ID) -->
-      <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="contact-form">
+    <section id="contact" class="contact" style="padding:18px 0">
+      <h2 class="section-title">Contact</h2>
+      <p class="section-sub">Prefer WhatsApp? Tap the green button or use the form.</p>
+      <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="contact-form" style="max-width:720px;display:flex;flex-direction:column;gap:8px">
         <input name="name" type="text" placeholder="Your name" required>
         <input name="email" type="email" placeholder="Email" required>
         <textarea name="message" rows="4" placeholder="Message / product you're interested in" required></textarea>
-        <div class="contact-actions">
-          <button type="submit" class="btn primary">Send message</button>
-          <a class="btn wa" href="https://wa.me/2347034774672" target="_blank" rel="noopener">Chat on WhatsApp</a>
-        </div>
+        <div style="display:flex;gap:8px;align-items:center"><button class="btn primary" type="submit">Send message</button><a class="btn ghost" href="https://wa.me/2347034774672">💬 WhatsApp</a></div>
       </form>
     </section>
   </main>
 
-  <!-- ================= PRODUCT DETAIL MODAL (re-usable) ================= -->
+  <!-- product modal -->
   <div id="product-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
     <div class="modal-inner">
-      <button class="modal-close" aria-label="Close details">✕</button>
+      <button class="modal-close" aria-label="Close">✕</button>
       <div class="modal-body">
-        <img id="modal-image" src="" alt="" class="modal-img">
+        <img id="modal-image" class="modal-img" src="" alt="">
         <div class="modal-info">
-          <h3 id="modal-title">Product name</h3>
-          <p id="modal-specs" class="specs">Specs</p>
-          <p id="modal-price" class="price">₦0</p>
-          <a id="modal-wa" class="btn wa" href="#" target="_blank" rel="noopener">💬 Contact via WhatsApp</a>
+          <h3 id="modal-title">Product</h3>
+          <p id="modal-specs" class="specs"></p>
+          <p id="modal-price" class="price" style="font-weight:900"></p>
+          <p id="modal-desc" style="color:var(--muted-text)"></p>
+          <div style="margin-top:12px"><a id="modal-wa" class="btn primary" href="#" target="_blank" rel="noopener">💬 Message seller</a></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ================= FOOTER ================= -->
-  <footer class="site-footer">
-    <div class="container">
-      <p>© <span id="year"></span> GadgetHub — Premium Gadget Dealer · <a href="https://wa.me/2347034774672">WhatsApp</a> · <a href="tel:+2347034774672">Call</a></p>
-    </div>
-  </footer>
+  <footer class="site-footer" style="padding:18px 0;margin-top:18px;border-top:1px solid rgba(16,24,40,0.04)"><div class="container" style="color:var(--muted-text)">© <span id="year"></span> TobbIe Gadgets · <a href="https://wa.me/2347034774672">WhatsApp</a></div></footer>
 
-  <!-- main script -->
-  <script src="script.js"></script>
+  <script>
+  // === Embedded JS: product catalog, search, filters, modal, and UX ===
+  document.addEventListener('DOMContentLoaded',()=>{
+    const $ = s => document.querySelector(s);
+    const $$ = s => Array.from(document.querySelectorAll(s));
+    const toNumber = s => Number(String(s).replace(/\D/g,''))||0;
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Canonical product list (expanded to cover items you listed)
+    const PRODUCTS = [
+      {brand:'iPhone',name:'iPhone 17 Pro Max',price:'₦2,500,000',priceValue:2500000,ram:'16GB',storage:'512GB',condition:'new',category:'phone',img:'img/17promax.jpeg'},
+      {brand:'iPhone',name:'iPhone 17 Air',price:'₦2,200,000',priceValue:2200000,ram:'12GB',storage:'256GB',condition:'new',category:'phone',img:'img/17.jpeg'},
+      {brand:'iPhone',name:'iPhone 16 Pro Max',price:'₦1,500,000',priceValue:1500000,ram:'8GB',storage:'256GB',condition:'new',category:'phone',img:'img/16promax.jpeg'},
+      {brand:'iPhone',name:'iPhone 15',price:'₦950,000',priceValue:950000,ram:'6GB',storage:'128GB',condition:'used',category:'phone',img:'img/15.jpeg'},
+      {brand:'Sony',name:'Xperia 1 III Dual 512GB',price:'₦1,200,000',priceValue:1200000,ram:'12GB',storage:'512GB',condition:'used',category:'phone',img:'img/xperia1.jpeg'},
+      {brand:'Sony',name:'Xperia 5 IV',price:'₦680,000',priceValue:680000,ram:'8GB',storage:'256GB',condition:'new',category:'phone',img:'img/xperia5.jpeg'},
+      {brand:'Samsung',name:'Galaxy S24 Ultra',price:'₦1,100,000',priceValue:1100000,ram:'12GB',storage:'512GB',condition:'used',category:'phone',img:'img/s24.jpeg'},
+      {brand:'Samsung',name:'Galaxy S23',price:'₦420,000',priceValue:420000,ram:'8GB',storage:'256GB',condition:'used',category:'phone',img:'img/s23.jpeg'},
+      {brand:'Samsung',name:'Galaxy A53',price:'₦150,000',priceValue:150000,ram:'6GB',storage:'128GB',condition:'used',category:'phone',img:'img/a53.jpeg'},
+      {brand:'Google Pixel',name:'Pixel 8 Pro',price:'₦720,000',priceValue:720000,ram:'12GB',storage:'256GB',condition:'new',category:'phone',img:'https://via.placeholder.com/600x400?text=Pixel+8+Pro'},
+      {brand:'Google Pixel',name:'Pixel 7a',price:'₦220,000',priceValue:220000,ram:'8GB',storage:'128GB',condition:'used',category:'phone',img:'https://via.placeholder.com/600x400?text=Pixel+7a'},
+      {brand:'Huawei',name:'Huawei P60',price:'₦500,000',priceValue:500000,ram:'8GB',storage:'256GB',condition:'used',category:'phone',img:'https://via.placeholder.com/600x400?text=Huawei+P60'},
+      {brand:'Redmi',name:'Redmi Note 12',price:'₦120,000',priceValue:120000,ram:'8GB',storage:'128GB',condition:'new',category:'phone',img:'https://via.placeholder.com/600x400?text=Redmi+Note+12'},
+      {brand:'Vivo',name:'Vivo X90',price:'₦380,000',priceValue:380000,ram:'8GB',storage:'256GB',condition:'used',category:'phone',img:'https://via.placeholder.com/600x400?text=Vivo+X90'},
+      {brand:'ASUS',name:'ROG Phone 6',price:'₦480,000',priceValue:480000,ram:'12GB',storage:'256GB',condition:'used',category:'phone',img:'https://via.placeholder.com/600x400?text=ROG+Phone+6'},
+      {brand:'ASUS',name:'ROG Phone 7 Ultimate',price:'₦680,000',priceValue:680000,ram:'16GB',storage:'512GB',condition:'new',category:'phone',img:'https://via.placeholder.com/600x400?text=ROG+Phone+7'},
+      {brand:'ASUS',name:'Zenfone 9',price:'₦260,000',priceValue:260000,ram:'8GB',storage:'128GB',condition:'used',category:'phone',img:'https://via.placeholder.com/600x400?text=Zenfone+9'},
+      {brand:'ASUS',name:'Zenfone 10',price:'₦340,000',priceValue:340000,ram:'8GB',storage:'256GB',condition:'new',category:'phone',img:'https://via.placeholder.com/600x400?text=Zenfone+10'},
+      {brand:'Nokia',name:'Nokia X',price:'₦65,000',priceValue:65000,ram:'4GB',storage:'64GB',condition:'used',category:'phone',img:'https://via.placeholder.com/600x400?text=Nokia+X'},
+      {brand:'Honor',name:'Honor 90',price:'₦210,000',priceValue:210000,ram:'8GB',storage:'256GB',condition:'new',category:'phone',img:'https://via.placeholder.com/600x400?text=Honor+90'},
+      {brand:'OnePlus',name:'OnePlus 12',price:'₦620,000',priceValue:620000,ram:'12GB',storage:'256GB',condition:'new',category:'phone',img:'https://via.placeholder.com/600x400?text=OnePlus+12'},
+      {brand:'Xiaomi',name:'Mi 13',price:'₦390,000',priceValue:390000,ram:'12GB',storage:'256GB',condition:'used',category:'phone',img:'https://via.placeholder.com/600x400?text=Mi+13'},
+      // consoles & games
+      {brand:'Sony',name:'PS5 (Disc)',price:'₦420,000',priceValue:420000,ram:'',storage:'',condition:'new',category:'console',img:'img/ps5di.jpeg'},
+      {brand:'Sony',name:'PS5 (Digital)',price:'₦370,000',priceValue:370000,condition:'new',category:'console',img:'img/ps5d.jpeg'},
+      {brand:'Sony',name:'PS4 Slim (Used)',price:'₦95,000',priceValue:95000,condition:'used',category:'console',img:'img/ps4.jpeg'},
+      {brand:'Nintendo',name:'Nintendo Switch',price:'₦200,000',priceValue:200000,condition:'used',category:'console',img:'img/psn.jpeg'},
+      {brand:'Nintendo',name:'Nintendo Switch OLED',price:'₦320,000',priceValue:320000,condition:'new',category:'console',img:'img/pso.jpeg'},
+      {brand:'Microsoft',name:'Xbox Series S',price:'₦180,000',priceValue:180000,condition:'used',category:'console',img:'img/psx.jpeg'},
+      {brand:'Sony',name:'PSP (Handheld, used)',price:'₦45,000',priceValue:45000,condition:'used',category:'handheld',img:'img/pso.jpeg'},
+      {brand:'Sony',name:'PS Vita (used)',price:'₦55,000',priceValue:55000,condition:'used',category:'handheld',img:'img/psx.jpeg'},
+      // tablets & watches
+      {brand:'Samsung',name:'Galaxy Tab S7',price:'₦380,000',priceValue:380000,condition:'used',category:'tablet',img:'https://via.placeholder.com/600x400?text=Galaxy+Tab+S7'},
+      {brand:'Samsung',name:'Galaxy Tab A8',price:'₦105,000',priceValue:105000,condition:'used',category:'tablet',img:'https://via.placeholder.com/600x400?text=Tab+A8'},
+      {brand:'Apple',name:'iPad Air',price:'₦480,000',priceValue:480000,condition:'new',category:'tablet',img:'https://via.placeholder.com/600x400?text=iPad+Air'},
+      {brand:'Apple',name:'iPad Mini',price:'₦360,000',priceValue:360000,condition:'used',category:'tablet',img:'https://via.placeholder.com/600x400?text=iPad+Mini'},
+      {brand:'Apple',name:'Apple Watch Series 9',price:'₦220,000',priceValue:220000,condition:'new',category:'watch',img:'https://via.placeholder.com/600x400?text=Apple+Watch+S9'},
+      {brand:'Samsung',name:'Galaxy Watch 6',price:'₦150,000',priceValue:150000,condition:'used',category:'watch',img:'https://via.placeholder.com/600x400?text=Galaxy+Watch+6'},
+      // laptops
+      {brand:'Lenovo',name:'Legion 5',price:'₦1,150,000',priceValue:1150000,ram:'16GB',storage:'512GB',condition:'new',category:'laptop',img:'https://via.placeholder.com/600x400?text=Legion+5'},
+      {brand:'ASUS',name:'ROG Zephyrus G14',price:'₦980,000',priceValue:980000,ram:'16GB',storage:'1TB',condition:'new',category:'laptop',img:'https://via.placeholder.com/600x400?text=Zephyrus+G14'},
+      {brand:'ASUS',name:'TUF Gaming A15',price:'₦560,000',priceValue:560000,ram:'8GB',storage:'512GB',condition:'used',category:'laptop',img:'https://via.placeholder.com/600x400?text=TUF+A15'},
+      {brand:'Generic',name:'Used Laptop (Core i5)',price:'₦220,000',priceValue:220000,ram:'8GB',storage:'512GB',condition:'used',category:'laptop',img:'https://via.placeholder.com/600x400?text=Used+Laptop'}
+    ];
+
+    // Populate filter options
+    const brandSet = Array.from(new Set(PRODUCTS.map(p=>p.brand))).sort();
+    const brandFilter = $('#brand-filter');
+    brandSet.forEach(b=>{const opt=document.createElement('option');opt.value=b;opt.textContent=b;brandFilter.appendChild(opt)});
+    const ramSet = Array.from(new Set(PRODUCTS.map(p=>p.ram).filter(Boolean))).sort((a,b)=>toNumber(a)-toNumber(b));
+    const storageSet = Array.from(new Set(PRODUCTS.map(p=>p.storage).filter(Boolean))).sort((a,b)=>toNumber(a)-toNumber(b));
+    const ramFilter = $('#ram-filter'); ramSet.forEach(r=>{const o=document.createElement('option');o.value=r;o.textContent=r;ramFilter.appendChild(o)});
+    const storageFilter = $('#storage-filter'); storageSet.forEach(s=>{const o=document.createElement('option');o.value=s;o.textContent=s;storageFilter.appendChild(o)});
+
+    // small helpers
+    const productsGrid = $('#products-grid'); let shown = 9; const PAGE=9;
+    function money(n){return '₦'+Number(n).toLocaleString()}
+
+    function renderGrid(opts={}){
+      const brand = opts.brand||'all'; const maxPrice = opts.maxPrice||Number($('#price-filter').value); const condition = opts.condition||'all'; const ram = opts.ram||'all'; const storage = opts.storage||'all'; const q = (opts.query||'').toLowerCase();
+      let filtered = PRODUCTS.filter(p=>{
+        if(brand!=='all'&&p.brand!==brand) return false;
+        if(condition!=='all'&&p.condition!==condition) return false;
+        if(ram!=='all'&&p.ram&&p.ram!==ram) return false;
+        if(storage!=='all'&&p.storage&&p.storage!==storage) return false;
+        if(toNumber(p.price)>maxPrice) return false;
+        if(q){const hay = `${p.name} ${p.brand} ${p.category} ${p.ram||''} ${p.storage||''}`.toLowerCase(); if(!hay.includes(q)) return false}
+        return true;
+      });
+      const toShow = filtered.slice(0,shown);
+      productsGrid.innerHTML = '';
+      toShow.forEach(p=>{
+        const card=document.createElement('article');card.className='product-card';
+        card.innerHTML = `
+          <img src="${p.img}" alt="${p.name}" loading="lazy">
+          <div class="product-meta">
+            <h4>${p.name}</h4>
+            <p class="specs">${p.brand}${p.ram? ' • '+p.ram:''}${p.storage? ' • '+p.storage:''} ${p.condition? ' • '+p.condition:''}</p>
+            <p class="price">${p.price}</p>
+            <div class="product-actions" style="display:flex;gap:8px;margin-top:6px">
+              <button class="btn ghost" data-open="${encodeURIComponent(p.name)}">Details</button>
+              <a class="btn primary" href="https://wa.me/2347034774672?text=${encodeURIComponent('Hello, I want the best price for '+p.name)}" target="_blank">💬 WhatsApp</a>
+            </div>
+          </div>
+        `;
+        card.dataset.product = JSON.stringify(p);
+        productsGrid.appendChild(card);
+      });
+      // load more visibility
+      $('#load-more').style.display = filtered.length>shown? 'inline-block':'none';
+    }
+
+    // initial render
+    renderGrid({maxPrice:Number($('#price-filter').value)});
+
+    // interactions
+    $('#price-filter').addEventListener('input',e=>{ $('#price-value').textContent = 'Up to '+money(e.target.value); renderGrid({brand:$('#brand-filter').value,condition:$('#condition-filter').value,ram:$('#ram-filter').value,storage:$('#storage-filter').value,query:$('#search-input').value,maxPrice:Number(e.target.value)}); });
+    $('#brand-filter').addEventListener('change',()=>renderGrid({brand:$('#brand-filter').value,condition:$('#condition-filter').value,ram:$('#ram-filter').value,storage:$('#storage-filter').value,query:$('#search-input').value,maxPrice:Number($('#price-filter').value)}));
+    $('#condition-filter').addEventListener('change',()=>renderGrid({brand:$('#brand-filter').value,condition:$('#condition-filter').value,ram:$('#ram-filter').value,storage:$('#storage-filter').value,query:$('#search-input').value,maxPrice:Number($('#price-filter').value)}));
+    $('#ram-filter').addEventListener('change',()=>renderGrid({brand:$('#brand-filter').value,condition:$('#condition-filter').value,ram:$('#ram-filter').value,storage:$('#storage-filter').value,query:$('#search-input').value,maxPrice:Number($('#price-filter').value)}));
+    $('#storage-filter').addEventListener('change',()=>renderGrid({brand:$('#brand-filter').value,condition:$('#condition-filter').value,ram:$('#ram-filter').value,storage:$('#storage-filter').value,query:$('#search-input').value,maxPrice:Number($('#price-filter').value)}));
+
+    // search debounce
+    let t;
+    $('#search-input').addEventListener('input',e=>{clearTimeout(t);t=setTimeout(()=>{renderGrid({brand:$('#brand-filter').value,condition:$('#condition-filter').value,ram:$('#ram-filter').value,storage:$('#storage-filter').value,query:$('#search-input').value,maxPrice:Number($('#price-filter').value)});},220)});
+
+    $('#load-more').addEventListener('click',()=>{shown+=PAGE;renderGrid({brand:$('#brand-filter').value,condition:$('#condition-filter').value,ram:$('#ram-filter').value,storage:$('#storage-filter').value,query:$('#search-input').value,maxPrice:Number($('#price-filter').value)});window.scrollTo({top:document.getElementById('catalog').offsetTop-80,behavior:'smooth'})});
+
+    // product details modal
+    const modal = $('#product-modal'); const modalImg = $('#modal-image'); const modalTitle = $('#modal-title'); const modalSpecs = $('#modal-specs'); const modalPrice = $('#modal-price'); const modalDesc = $('#modal-desc'); const modalWa = $('#modal-wa');
+    function openModal(p){modalImg.src = p.img||''; modalImg.alt = p.name; modalTitle.textContent = p.name; modalSpecs.textContent = `${p.brand}${p.ram? ' • '+p.ram:''}${p.storage? ' • '+p.storage:''}`; modalPrice.textContent = p.price||''; modalDesc.textContent = p.category? ('Category: '+p.category):''; modalWa.href = 'https://wa.me/2347034774672?text='+encodeURIComponent('Hello, I want the best price for '+p.name); modal.style.display='flex'; modal.setAttribute('aria-hidden','false'); }
+    function closeModal(){modal.style.display='none'; modal.setAttribute('aria-hidden','true');}
+    document.addEventListener('click',e=>{
+      const btn = e.target.closest('[data-open]'); if(btn){ const id = decodeURIComponent(btn.dataset.open); let found = null; // try to parse dataset
+        try{ const parsed = btn.closest('.product-card') && JSON.parse(btn.closest('.product-card').dataset.product); if(parsed && parsed.name===id) found = parsed;}catch(err){}
+        if(!found) found = PRODUCTS.find(p=>p.name===id);
+        if(found) openModal(found); else alert('Product details not available'); }
+    });
+    $('.modal-close').addEventListener('click',closeModal);
+    window.addEventListener('click',e=>{ if(e.target===modal) closeModal(); });
+    window.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
+
+    // slide controls
+    $$('.brand-slider').forEach(block=>{const track=block.querySelector('.slider-track');const slides=Array.from(track.children);let idx=0;const show=i=>{idx=((i%slides.length)+slides.length)%slides.length;track.scrollTo({left:slides[idx].offsetLeft-6,behavior:'smooth'})};block.querySelectorAll('.slider-btn').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.action==='prev')show(idx-1);else show(idx+1)}));});
+
+    // make some featured brand products appear in the brand-products area
+    const bp = document.getElementById('brand-sample-products'); const games = document.getElementById('games-sample');
+    PRODUCTS.slice(0,6).forEach(p=>{const el=document.createElement('article');el.className='product-card';el.innerHTML = `<img src="${p.img}" alt="${p.name}"><div class="product-meta"><h4>${p.name}</h4><p class="specs">${p.brand} ${p.ram? '• '+p.ram:''}</p><p class="price">${p.price}</p><div style="display:flex;gap:8px"><button class="btn ghost" data-open="${encodeURIComponent(p.name)}">Details</button><a class="btn primary" href="https://wa.me/2347034774672?text=${encodeURIComponent('Hi, I want '+p.name)}" target="_blank">💬 WhatsApp</a></div></div>`; bp.appendChild(el)});
+    PRODUCTS.filter(p=>p.category==='console' || p.category==='handheld').slice(0,6).forEach(p=>{const el=document.createElement('article');el.className='product-card';el.innerHTML=`<img src="${p.img}" alt="${p.name}"><div class="product-meta"><h4>${p.name}</h4><p class="specs">${p.brand}</p><p class="price">${p.price}</p><div style="display:flex;gap:8px"><button class="btn ghost" data-open="${encodeURIComponent(p.name)}">Details</button><a class="btn primary" href="https://wa.me/2347034774672?text=${encodeURIComponent('Hi, I want '+p.name)}" target="_blank">💬 WhatsApp</a></div></div>`; games.appendChild(el)});
+
+    // mobile nav toggle
+    document.querySelector('.mobile-toggle').addEventListener('click',()=>{const nav=document.querySelector('.main-nav');const expanded = document.querySelector('.mobile-toggle').getAttribute('aria-expanded')==='true';document.querySelector('.mobile-toggle').setAttribute('aria-expanded',String(!expanded));nav.style.display = expanded? 'none':'block';});
+
+    // accessibility: focus trap for modal
+    modal.addEventListener('keydown',e=>{ if(e.key==='Tab'){ const focusables=modal.querySelectorAll('a,button,input,textarea'); if(focusables.length){ const first=focusables[0], last=focusables[focusables.length-1]; if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); } else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); } } }});
+
+    // small page reveal
+    document.body.style.opacity=0;document.body.style.transition='opacity 300ms';setTimeout(()=>document.body.style.opacity=1,60);
+  });
+  </script>
 </body>
 </html>
