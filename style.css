@@ -40,6 +40,66 @@
     margin: 0 auto;
     padding: 0 20px;
   }
+  /* ========= MOBILE-FIRST FIXES ========= */
+html, body {
+    width: 100%;
+    overflow-x: hidden; /* no horizontal scrolling */
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* Product cards: always full-width on mobile */
+  .product-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .product-card img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+  }
+  
+  /* Grids: default 1 column (mobile first) */
+  .brand-products,
+  .products-grid,
+  #products-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Slides: scale down for phone width */
+  .slide {
+    min-width: 80%;  /* instead of 220px */
+    max-width: 90%;
+  }
+  
+  /* Testimonial items stack */
+  .testimonial-list {
+    flex-direction: column;
+  }
+  .testimonial {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  /* Hero section: stack vertically by default */
+  .hero-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero-image {
+    order: -1; /* show image above text */
+    width: 100%;
+  }
+  
+  /* CTA bar: ensure not overlapping content */
+  body {
+    padding-bottom: 80px; /* space for sticky CTA */
+  }
   
   /* ---------- Links & Buttons ---------- */
   a { color: inherit; text-decoration: none; }
