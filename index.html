@@ -59,6 +59,72 @@
   margin-bottom: 8px;
   display: block;
 }
+/* make header stack on mobile */
+/* Header container */
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Nav + CTAs hidden on mobile by default */
+.main-nav,
+.header-ctas {
+  display: none;
+  width: 100%;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* Show when active */
+.main-nav.active,
+.header-ctas.active {
+  display: flex;
+}
+
+/* Full-width buttons on mobile */
+.header-ctas a {
+  flex: 1;
+  text-align: center;
+}
+
+/* Nav list reset */
+.main-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Mobile toggle */
+.mobile-toggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Larger screens: inline layout */
+@media (min-width: 768px) {
+  .main-nav,
+  .header-ctas {
+    display: flex !important;
+    flex-direction: row;
+    width: auto;
+    margin-top: 0;
+  }
+  .main-nav ul {
+    flex-direction: row;
+    gap: 16px;
+  }
+  .mobile-toggle {
+    display: none;
+  }
+}
 
   /* modal */
   .modal{display:none;position:fixed;inset:0;background:rgba(2,6,23,0.5);align-items:center;justify-content:center;padding:12px;z-index:1600}
@@ -74,27 +140,32 @@
 </head>
 <body>
   <div class="sticky-cta"><a href="https://wa.me/2347034774672?text=Hello%20TobbIe%20Gadgets" target="_blank" rel="noopener">💬 Message TobbIe Gadgets on WhatsApp</a></div>
-  <header class="site-header" role="banner">
+  <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="#">
-        <svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#25D366"></rect></svg>
         <span class="brand-name">TobbIe Gadgets</span>
       </a>
-      <nav class="main-nav" role="navigation" aria-label="Main">
+  
+      <!-- Mobile toggle button -->
+      <button class="mobile-toggle" aria-label="Toggle menu">☰</button>
+  
+      <!-- Navigation -->
+      <nav class="main-nav" role="navigation">
         <ul>
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#brands">Brands</a></li>
           <li><a href="#catalog">Catalog</a></li>
+          <li><a href="#brands">Brands</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
+  
+      <!-- Call + WhatsApp buttons -->
       <div class="header-ctas">
-        <a class="btn ghost" href="tel:+2347034774672">📞 07034774672</a>
-        <a class="btn ghost" href="https://wa.me/2347034774672">💬 WhatsApp</a>
-        <button class="mobile-toggle" aria-expanded="false" aria-label="Open menu">☰</button>
+        <a class="btn ghost" href="tel:+2347034774672">📞 Call</a>
+        <a class="btn primary" href="https://wa.me/2347034774672" target="_blank">💬 WhatsApp</a>
       </div>
     </div>
   </header>
+  
 
   <section id="hero" class="hero">
     <div class="container hero-inner">
@@ -143,8 +214,8 @@
           <button class="slider-btn prev" data-action="prev">‹</button>
           <div class="slider-track" id="phones-slider">
             <div class="slide"><img src="img/17.webp" alt="iPhone 17 Pro Max" data-product='{"name":"iPhone 17 Pro Max","brand":"iPhone","price":"₦2,500,000","ram":"16GB","storage":"512GB","img":"img:/17.webp"}'></div>
-            <div class="slide"><img src="img/xperia1.jpeg" alt="Xperia 1 III Dual 512GB" data-product='{"name":"Xperia 1 III Dual 512GB","brand":"Sony","price":"₦1,200,000","ram":"12GB","storage":"512GB","img":"https://via.placeholder.com/800x400?text=Xperia+1+III"}'></div>
-            <div class="slide"><img src="img/s24.jpeg" alt="Galaxy S24 Ultra" data-product='{"name":"Galaxy S24 Ultra","brand":"Samsung","price":"₦1,100,000","ram":"12GB","storage":"512GB","img":"https://via.placeholder.com/800x400?text=S24+Ultra"}'></div>
+            <div class="slide"><img src="img/xperia1.jpeg" alt="Xperia 1 III Dual 512GB" data-product='{"name":"Xperia 1 III Dual 512GB","brand":"Sony","price":"₦1,200,000","ram":"12GB","storage":"512GB","img":"img/800x400?text=Xperia+1+III"}'></div>
+            <div class="slide"><img src="img/s24.jpeg" alt="Galaxy S24 Ultra" data-product='{"name":"Galaxy S24 Ultra","brand":"Samsung","price":"₦1,100,000","ram":"12GB","storage":"512GB","img":"img/800x400?text=S24+Ultra"}'></div>
           </div>
           <button class="slider-btn next" data-action="next">›</button>
         </div>
@@ -234,19 +305,19 @@
       {brand:'Samsung',name:'Galaxy S24 Ultra',price:'₦1,100,000',priceValue:1100000,ram:'12GB',storage:'512GB',condition:'used',category:'phone',img:'img/s24.jpeg'},
       {brand:'Samsung',name:'Galaxy S23',price:'₦420,000',priceValue:420000,ram:'8GB',storage:'256GB',condition:'used',category:'phone',img:'img/s23.jpeg'},
       {brand:'Samsung',name:'Galaxy A53',price:'₦150,000',priceValue:150000,ram:'6GB',storage:'128GB',condition:'used',category:'phone',img:'img/a53.jpeg'},
-      {brand:'Google Pixel',name:'Pixel 8 Pro',price:'₦720,000',priceValue:720000,ram:'12GB',storage:'256GB',condition:'new',category:'phone',img:'https://via.placeholder.com/600x400?text=Pixel+8+Pro'},
-      {brand:'Google Pixel',name:'Pixel 7a',price:'₦220,000',priceValue:220000,ram:'8GB',storage:'128GB',condition:'used',category:'phone',img:'https://via.placeholder.com/600x400?text=Pixel+7a'},
-      {brand:'Huawei',name:'Huawei P60',price:'₦500,000',priceValue:500000,ram:'8GB',storage:'256GB',condition:'used',category:'phone',img:'https://via.placeholder.com/600x400?text=Huawei+P60'},
-      {brand:'Redmi',name:'Redmi Note 12',price:'₦120,000',priceValue:120000,ram:'8GB',storage:'128GB',condition:'new',category:'phone',img:'https://via.placeholder.com/600x400?text=Redmi+Note+12'},
-      {brand:'Vivo',name:'Vivo X90',price:'₦380,000',priceValue:380000,ram:'8GB',storage:'256GB',condition:'used',category:'phone',img:'https://via.placeholder.com/600x400?text=Vivo+X90'},
-      {brand:'ASUS',name:'ROG Phone 6',price:'₦480,000',priceValue:480000,ram:'12GB',storage:'256GB',condition:'used',category:'phone',img:'https://via.placeholder.com/600x400?text=ROG+Phone+6'},
-      {brand:'ASUS',name:'ROG Phone 7 Ultimate',price:'₦680,000',priceValue:680000,ram:'16GB',storage:'512GB',condition:'new',category:'phone',img:'https://via.placeholder.com/600x400?text=ROG+Phone+7'},
-      {brand:'ASUS',name:'Zenfone 9',price:'₦260,000',priceValue:260000,ram:'8GB',storage:'128GB',condition:'used',category:'phone',img:'https://via.placeholder.com/600x400?text=Zenfone+9'},
-      {brand:'ASUS',name:'Zenfone 10',price:'₦340,000',priceValue:340000,ram:'8GB',storage:'256GB',condition:'new',category:'phone',img:'https://via.placeholder.com/600x400?text=Zenfone+10'},
-      {brand:'Nokia',name:'Nokia X',price:'₦65,000',priceValue:65000,ram:'4GB',storage:'64GB',condition:'used',category:'phone',img:'https://via.placeholder.com/600x400?text=Nokia+X'},
-      {brand:'Honor',name:'Honor 90',price:'₦210,000',priceValue:210000,ram:'8GB',storage:'256GB',condition:'new',category:'phone',img:'https://via.placeholder.com/600x400?text=Honor+90'},
-      {brand:'OnePlus',name:'OnePlus 12',price:'₦620,000',priceValue:620000,ram:'12GB',storage:'256GB',condition:'new',category:'phone',img:'https://via.placeholder.com/600x400?text=OnePlus+12'},
-      {brand:'Xiaomi',name:'Mi 13',price:'₦390,000',priceValue:390000,ram:'12GB',storage:'256GB',condition:'used',category:'phone',img:'https://via.placeholder.com/600x400?text=Mi+13'},
+      {brand:'Google Pixel',name:'Pixel 8 Pro',price:'₦720,000',priceValue:720000,ram:'12GB',storage:'256GB',condition:'new',category:'phone',img:'img/pixel8pro.jpeg'},
+      {brand:'Google Pixel',name:'Pixel 7a',price:'₦220,000',priceValue:220000,ram:'8GB',storage:'128GB',condition:'used',category:'phone',img:'img/Pixel7a.jpeg'},
+      {brand:'Huawei',name:'Huawei P60',price:'₦500,000',priceValue:500000,ram:'8GB',storage:'256GB',condition:'used',category:'phone',img:'img/HuaweiP60.jpeg'},
+      {brand:'Redmi',name:'Redmi Note 12',price:'₦120,000',priceValue:120000,ram:'8GB',storage:'128GB',condition:'new',category:'phone',img:'img/RedmiNote12.jpeg'},
+      {brand:'Vivo',name:'Vivo X90',price:'₦380,000',priceValue:380000,ram:'8GB',storage:'256GB',condition:'used',category:'phone',img:'img/VivoX90.jpeg'},
+      {brand:'ASUS',name:'ROG Phone 6',price:'₦480,000',priceValue:480000,ram:'12GB',storage:'256GB',condition:'used',category:'phone',img:'img/RogPhone6.jpeg'},
+      {brand:'ASUS',name:'ROG Phone 7 Ultimate',price:'₦680,000',priceValue:680000,ram:'16GB',storage:'512GB',condition:'new',category:'phone',img:'img/RogPhone7.jpeg'},
+      {brand:'ASUS',name:'Zenfone 9',price:'₦260,000',priceValue:260000,ram:'8GB',storage:'128GB',condition:'used',category:'phone',img:'img/Zenphone9.jpeg'},
+      {brand:'ASUS',name:'Zenfone 10',price:'₦340,000',priceValue:340000,ram:'8GB',storage:'256GB',condition:'new',category:'phone',img:'img/Zenphone10.jpeg'},
+      {brand:'Nokia',name:'Nokia X',price:'₦65,000',priceValue:65000,ram:'4GB',storage:'64GB',condition:'used',category:'phone',img:'img/NokiaX.jpeg'},
+      {brand:'Honor',name:'Honor 90',price:'₦210,000',priceValue:210000,ram:'8GB',storage:'256GB',condition:'new',category:'phone',img:'img/Honor90.peg'},
+      {brand:'OnePlus',name:'OnePlus 12',price:'₦620,000',priceValue:620000,ram:'12GB',storage:'256GB',condition:'new',category:'phone',img:'img/OnePlus12.jpeg'},
+      {brand:'Xiaomi',name:'Mi 13',price:'₦390,000',priceValue:390000,ram:'12GB',storage:'256GB',condition:'used',category:'phone',img:'img/Mi13.jpeg'},
       // consoles & games
       {brand:'Sony',name:'PS5 (Disc)',price:'₦420,000',priceValue:420000,ram:'',storage:'',condition:'new',category:'console',img:'img/ps5di.jpeg'},
       {brand:'Sony',name:'PS5 (Digital)',price:'₦370,000',priceValue:370000,condition:'new',category:'console',img:'img/ps5d.jpeg'},
@@ -257,17 +328,81 @@
       {brand:'Sony',name:'PSP (Handheld, used)',price:'₦45,000',priceValue:45000,condition:'used',category:'handheld',img:'img/pso.jpeg'},
       {brand:'Sony',name:'PS Vita (used)',price:'₦55,000',priceValue:55000,condition:'used',category:'handheld',img:'img/psx.jpeg'},
       // tablets & watches
-      {brand:'Samsung',name:'Galaxy Tab S7',price:'₦380,000',priceValue:380000,condition:'used',category:'tablet',img:'https://via.placeholder.com/600x400?text=Galaxy+Tab+S7'},
-      {brand:'Samsung',name:'Galaxy Tab A8',price:'₦105,000',priceValue:105000,condition:'used',category:'tablet',img:'https://via.placeholder.com/600x400?text=Tab+A8'},
-      {brand:'Apple',name:'iPad Air',price:'₦480,000',priceValue:480000,condition:'new',category:'tablet',img:'https://via.placeholder.com/600x400?text=iPad+Air'},
-      {brand:'Apple',name:'iPad Mini',price:'₦360,000',priceValue:360000,condition:'used',category:'tablet',img:'https://via.placeholder.com/600x400?text=iPad+Mini'},
-      {brand:'Apple',name:'Apple Watch Series 9',price:'₦220,000',priceValue:220000,condition:'new',category:'watch',img:'https://via.placeholder.com/600x400?text=Apple+Watch+S9'},
-      {brand:'Samsung',name:'Galaxy Watch 6',price:'₦150,000',priceValue:150000,condition:'used',category:'watch',img:'https://via.placeholder.com/600x400?text=Galaxy+Watch+6'},
+      {brand:'Samsung',name:'Galaxy Tab S7',price:'₦380,000',priceValue:380000,condition:'used',category:'tablet',img:'img/Galaxytabs7.jpg'},
+      {brand:'Samsung',name:'Galaxy Tab A8',price:'₦105,000',priceValue:105000,condition:'used',category:'tablet',img:'img/GalaxytabsA8.jpeg'},
+      {brand:'Apple',name:'iPad Air',price:'₦480,000',priceValue:480000,condition:'new',category:'tablet',img:'img/iPad'},
+      {brand:'Apple',name:'iPad Mini',price:'₦360,000',priceValue:360000,condition:'used',category:'tablet',img:'img/iPad+Mini'},
+      {brand:'Apple',name:'Apple Watch Series 9',price:'₦220,000',priceValue:220000,condition:'new',category:'watch',img:'img/Apple+Watch+S9'},
+      {brand:'Samsung',name:'Galaxy Watch 6',price:'₦150,000',priceValue:150000,condition:'used',category:'watch',img:'img/Galaxy+Watch+6'},
       // laptops
-      {brand:'Lenovo',name:'Legion 5',price:'₦1,150,000',priceValue:1150000,ram:'16GB',storage:'512GB',condition:'new',category:'laptop',img:'https://via.placeholder.com/600x400?text=Legion+5'},
-      {brand:'ASUS',name:'ROG Zephyrus G14',price:'₦980,000',priceValue:980000,ram:'16GB',storage:'1TB',condition:'new',category:'laptop',img:'https://via.placeholder.com/600x400?text=Zephyrus+G14'},
-      {brand:'ASUS',name:'TUF Gaming A15',price:'₦560,000',priceValue:560000,ram:'8GB',storage:'512GB',condition:'used',category:'laptop',img:'https://via.placeholder.com/600x400?text=TUF+A15'},
-      {brand:'Generic',name:'Used Laptop (Core i5)',price:'₦220,000',priceValue:220000,ram:'8GB',storage:'512GB',condition:'used',category:'laptop',img:'https://via.placeholder.com/600x400?text=Used+Laptop'}
+      {brand:'Lenovo',name:'Legion 5',price:'₦1,150,000',priceValue:1150000,ram:'16GB',storage:'512GB',condition:'new',category:'laptop',img:'img/Legion5.jpeg'},
+      {brand:'ASUS',name:'ROG Zephyrus G14',price:'₦980,000',priceValue:980000,ram:'16GB',storage:'1TB',condition:'new',category:'laptop',img:'img/ZephyrusG14.jpeg'},
+      {brand:'ASUS',name:'TUF Gaming A15',price:'₦560,000',priceValue:560000,ram:'8GB',storage:'512GB',condition:'used',category:'laptop',img:'img/TufA15'},
+      {brand:'Generic',name:'Used Laptop (Core i5)',price:'₦220,000',priceValue:220000,ram:'8GB',storage:'512GB',condition:'used',category:'laptop',img:'img/usedlaptop.jpeg'}
+    ,
+      {brand:"Lenovo",name:"LEGION GO (Ryzen Z1, 16GB, 512GB)",price:"\u20a61,185,000",priceValue:1185000,ram:"16GB",storage:"512GB",condition:"new",category:"handheld",img:"img/LenovoGo.jpg"},
+      {brand:"Apple",name:"MacBook Pro 13\" 2022 (M2, 8GB, 256GB)",price:"\u20a61,200,000",priceValue:1200000,ram:"8GB",storage:"256GB",condition:"new",category:"laptop",img:"img/MacBook+Pro+13+M2.jpg"},
+      {brand:"Apple",name:"AirPods Pro 3 (3rd Gen) - Brand New",price:"\u20a6470,000",priceValue:470000,ram:"",storage:"",condition:"new",category:"accessory",img:"img/AirPods+Pro+3.jpg"},
+      {brand:"Vivo",name:"Vivo V30 (12+12GB, 512GB) - Fresh as new",price:"\u20a6445,000",priceValue:445000,ram:"12GB",storage:"512GB",condition:"used",category:"phone",img:"img/Vivo+V30.jpg"},
+      {brand:"Vivo",name:"Vivo V40 Lite (8+8GB, 256GB) - Fresh as new",price:"\u20a6325,000",priceValue:325000,ram:"8GB",storage:"256GB",condition:"used",category:"phone",img:"img/.jpg"},
+      {brand:"Samsung",name:"Galaxy Tab S7 FE (UK used) 6GB/128GB",price:"\u20a6630,000",priceValue:630000,ram:"6GB",storage:"128GB",condition:"used",category:"tablet",img:"img/Galaxy+Tab+S7+FE.jpg"},
+      {brand:"Honor",name:"Honor 40 Lite (8GB, 256GB) - Brand New",price:"\u20a6380,000",priceValue:380000,ram:"8GB",storage:"256GB",condition:"new",category:"phone",img:"img/Honor+40+Lite.jpg"},
+      {brand:"Samsung",name:"Galaxy S10 (UK used) 8GB/128GB",price:"\u20a6230,000",priceValue:230000,ram:"8GB",storage:"128GB",condition:"used",category:"phone",img:"img/Galaxy+S10.jpg"},
+      {brand:"Honor",name:"Honor Pad X8a (Brand New sealed) 4GB/128GB",price:"\u20a6320,000",priceValue:320000,ram:"4GB",storage:"128GB",condition:"new",category:"tablet",img:"img/Honor+Pad+X8a.jpg"},
+      {brand:"Google",name:"Pixel 9 Pro (16GB/256GB) - Brand New (Physical SIM + eSIM)",price:"\u20a62,000,000",priceValue:2000000,ram:"16GB",storage:"256GB",condition:"new",category:"phone",img:"img/Pixel+9+Pro+256GB.jpg"},
+      {brand:"Google",name:"Pixel 9 Pro (16GB/512GB) - Brand New",price:"\u20a62,550,000",priceValue:2550000,ram:"16GB",storage:"512GB",condition:"new",category:"phone",img:"img/Pixel+9+Pro+256GB.jpg"},
+      {brand:"Google",name:"Pixel 10 Pro XL (16GB/256GB) - Brand New",price:"\u20a61,700,000",priceValue:1700000,ram:"16GB",storage:"256GB",condition:"new",category:"phone",img:"img/Pixel+10+Pro+XL+256GB.jpg"},
+      {brand:"Google",name:"Pixel 10 Pro XL (16GB/512GB) - Brand New",price:"\u20a62,050,000",priceValue:2050000,ram:"16GB",storage:"512GB",condition:"new",category:"phone",img:"img/Pixel+10+Pro+XL+256GB.jpg"},
+      {brand:"Apple",name:"iPhone 17 Pro (512GB, eSIM) - Brand New",price:"\u20a62,520,000",priceValue:2520000,ram:"16GB",storage:"512GB",condition:"new",category:"phone",img:"img/iPhone+17+Pro+512GB.jpg"},
+      {brand:"Apple",name:"iPhone 17 Pro (256GB) - Brand New",price:"\u20a62,400,000",priceValue:2400000,ram:"12GB",storage:"256GB",condition:"new",category:"phone",img:"img/iPhone+17+Pro+512GB.jpg"},
+      {brand:"Apple",name:"iPhone 17 Pro Max (512GB, eSIM) - Brand New",price:"\u20a63,050,000",priceValue:3050000,ram:"16GB",storage:"512GB",condition:"new",category:"phone",img:"img/iPhone+17+Pro+Max+512GB.jpg"},
+      {brand:"Apple",name:"iPhone 17 Pro Max (256GB) - Brand New",price:"\u20a62,850,000",priceValue:2850000,ram:"12GB",storage:"256GB",condition:"new",category:"phone",img:"img/iPhone+17+Pro+Max+512GB.jpg"},
+      {brand:"Sony",name:"PlayStation 5 Slim (with 10 games + 2 pads) - Fresh as new",price:"\u20a6900,000",priceValue:900000,ram:"",storage:"",condition:"used",category:"console",img:"img/PS5+Slim+Bundle.jpg"},
+      {brand:"Valve",name:"Steam Deck (LCD) 1TB - Just like new",price:"\u20a6760,000",priceValue:760000,ram:"",storage:"1TB",condition:"used",category:"handheld",img:"img/Steam+Deck+1TB.jpg"},
+      {brand:"Apple",name:"iPhone 13 Pro Max (UK used) 256GB",price:"\u20a6730,000",priceValue:730000,ram:"6GB",storage:"256GB",condition:"used",category:"phone",img:"img/iPhone+13+Pro+Max+256GB.jpg"},
+      {brand:"Apple",name:"iPhone 13 Pro Max (UK used) 128GB",price:"\u20a6685,000",priceValue:685000,ram:"6GB",storage:"128GB",condition:"used",category:"phone",img:"img/iPhone+13+Pro+Max+256GB"},
+      {brand:"Sony",name:"PS4 Slim (2 pads + 10 games) - Used",price:"\u20a6300,000",priceValue:300000,ram:"",storage:"",condition:"used",category:"console",img:"img/PS4+Slim+Bundle.jpg"},
+      {brand:"Sony",name:"PS5 Fat (UK used) (2 pad + 10 downloaded games) - FIFA25 package",price:"\u20a6810000",priceValue:810000,ram:"",storage:"",condition:"used",category:"console",img:"img/PS5+Fat+FIFA25.jpg"},
+      {brand:"Sony",name:"PS4 (UK used) 2 pads + 10 games - Fresh as new",price:"\u20a6270000",priceValue:270000,ram:"",storage:"",condition:"used",category:"console",img:"img/PS4+Bundle"},
+      {brand:"Dell",name:"XPS 13 Plus (12th Gen, 32GB, 1TB SSD, i7, Touch)",price:"\u20a61,730,000",priceValue:1730000,ram:"32GB",storage:"1TB",condition:"new",category:"laptop",img:"img/Dell+XPS+13+Plus.jpg"},
+      {brand:"Microsoft",name:"Xbox One (UK used) + 2 controllers + 7 games - Fresh as new",price:"\u20a6260,000",priceValue:260000,ram:"",storage:"",condition:"used",category:"console",img:"img/Xbox+One+Bundle.jpg"},
+      {brand:"Samsung",name:"Galaxy Z Fold 6 (UK used) 12GB/512GB - Fresh as new",price:"\u20a61,450,000",priceValue:1450000,ram:"12GB",storage:"512GB",condition:"used",category:"phone",img:"img/Galaxy+Z+Fold+6.jpg"},
+      {brand:"Sony",name:"PS3 (UK used) 2 pads + 10 games - Fresh as new",price:"\u20a6180,000",priceValue:180000,ram:"",storage:"",condition:"used",category:"console",img:"img/PS3+Bundle"},
+      {brand:"Samsung",name:"Tab A7 2020 (10.4\", 32GB, 3GB) - UK used",price:"\u20a6180,000",priceValue:180000,ram:"3GB",storage:"32GB",condition:"used",category:"tablet",img:"img/Tab+A7+2020.jpg"},
+      {brand:"Vivo",name:"Vivo V50 (12GB, 512GB) - Coming soon (in transit)",price:"\u20a6700,000",priceValue:700000,ram:"12GB",storage:"512GB",condition:"used",category:"phone",img:"img/Vivo+V50"},
+      {brand:"Apple",name:"Apple Watch Series 10 (42mm) - Brand New",price:"\u20a6430,000",priceValue:430000,ram:"",storage:"",condition:"new",category:"watch",img:"img/Apple+Watch+S10"},
+      {brand:"Samsung",name:"Galaxy Z Fold 7 (512GB) - Brand New (Physical SIM + eSIM)",price:"\u20a62,320,000",priceValue:2320000,ram:"",storage:"512GB",condition:"new",category:"phone",img:"img/Galaxy+Z+Fold+7+512GB.jpg"},
+      {brand:"Samsung",name:"65W Trio Power Adapter (2x Type-C + 1x USB) - Brand New",price:"\u20a615,000",priceValue:15000,ram:"",storage:"",condition:"new",category:"accessory",img:"img/65W+Trio+Charger.jpg"},
+      {brand:"Samsung",name:"Galaxy Z Flip 6 (UK used) 256GB - Fresh as new",price:"\u20a6790,000",priceValue:790000,ram:"",storage:"256GB",condition:"used",category:"phone",img:"img/Galaxy+Z+Flip+6.jpg"},
+      {brand:"Xiaomi",name:"Mi 11 Ultra (Foreign used) 12GB/256GB - Fresh as new",price:"\u20a6485,000",priceValue:485000,ram:"12GB",storage:"256GB",condition:"used",category:"phone",img:"img/Mi+11+Ultra.jpg"},
+      {brand:"Samsung",name:"Galaxy S23 Plus (UK used) 8GB/256GB - Fresh as new",price:"\u20a6700,000",priceValue:700000,ram:"8GB",storage:"256GB",condition:"used",category:"phone",img:"img/Galaxy+S23+Plus"},
+      {brand:"Sony",name:"PSVita (UK used) + 32GB + 10 games - Fresh as brand new",price:"\u20a6235,000",priceValue:235000,ram:"",storage:"32GB",condition:"used",category:"handheld",img:"img/PSVita+Bundle.jpg"},
+      {brand:"Dell",name:"XPS 13 9365 (UK used) x360 Core i5 8GB/256GB - Fresh as new",price:"\u20a6540,000",priceValue:540000,ram:"8GB",storage:"256GB",condition:"used",category:"laptop",img:"img/Dell+XPS+13+9365"},
+      {brand:"Google",name:"Pixel Watch 2 - Fresh as brand new",price:"\u20a6275,000",priceValue:275000,ram:"",storage:"",condition:"new",category:"watch",img:"img/Pixel+Watch+2.jpg"},
+      {brand:"Xiaomi",name:"Mi 11T Pro Dual (8+4GB, 256GB) - Fresh as new",price:"\u20a6255,000",priceValue:255000,ram:"8GB",storage:"256GB",condition:"used",category:"phone",img:"img/Mi+11T+Pro.jpg"},
+      {brand:"Infinix",name:"Infinix Smart 7 (4GB/64GB) - Fresh as new",price:"\u20a6100,000",priceValue:100000,ram:"4GB",storage:"64GB",condition:"used",category:"phone",img:"img/Infinix+Smart+7.jpg"},
+      {brand:"Google",name:"Pixel 6 Pro (UK used) 12GB/128GB",price:"\u20a6355,000",priceValue:355000,ram:"12GB",storage:"128GB",condition:"used",category:"phone",img:"img/Pixel+6+Pro+128GB"},
+      {brand:"Apple",name:"iPad Mini 6 (WiFi only) 64GB - Fresh as new",price:"\u20a6450,000",priceValue:450000,ram:"",storage:"64GB",condition:"used",category:"tablet",img:"img/iPad+Mini+6+64GB.jpg"},
+      {brand:"Google",name:"Pixel 6 (128GB) - \u20a6300,000",price:"\u20a6300,000",priceValue:300000,ram:"",storage:"128GB",condition:"used",category:"phone",img:"img/Pixel+6+128GB.jpeg"},
+      {brand:"Google",name:"Pixel 6a (128GB) - \u20a6255,000",price:"\u20a6255,000",priceValue:255000,ram:"",storage:"128GB",condition:"used",category:"phone",img:"img/Pixel+6a+128GB.jpeg"},
+      {brand:"Google",name:"Pixel 7 (128GB) - \u20a6360,000",price:"\u20a6360,000",priceValue:360000,ram:"",storage:"128GB",condition:"used",category:"phone",img:"img/Pixel+7+128GB.jpeg"},
+      {brand:"Google",name:"Pixel 8 (128GB) - \u20a6490,000",price:"\u20a6490,000",priceValue:490000,ram:"",storage:"128GB",condition:"new",category:"phone",img:"img/Pixel+8+128GB.jpeg"},
+      {brand:"Apple",name:"iWatch Series 6 44mm - \u20a6240,000",price:"\u20a6240,000",priceValue:240000,ram:"",storage:"",condition:"used",category:"watch",img:"img/Apple+Watch+Series+6.jpeg"},
+      {brand:"Apple",name:"iWatch Series 7 45mm - \u20a6285,000",price:"\u20a6285,000",priceValue:285000,ram:"",storage:"",condition:"used",category:"watch",img:"img/Apple+Watch+Series+7.jpeg"},
+      {brand:"Apple",name:"iWatch Series 8 45mm - \u20a6330,000",price:"\u20a6330,000",priceValue:330000,ram:"",storage:"",condition:"used",category:"watch",img:"img/Apple+Watch+Series+8.jpeg"},
+      {brand:"Zealot",name:"Zealot S67 Bluetooth Speaker (14,400mAh) - \u20a668,000",price:"\u20a668,000",priceValue:68000,ram:"",storage:"",condition:"new",category:"accessory",img:"img/Zealot+S67+Speaker.jpeg"},
+      {brand:"Motorola",name:"Motorola Razr Plus 2023 (UK used) 8GB/256GB",price:"\u20a6480,000",priceValue:480000,ram:"8GB",storage:"256GB",condition:"used",category:"phone",img:"img/Motorola+Razr+Plus+2023.jpeg"},
+      {brand:"Apple",name:"iPod Touch 7th Gen (UK used) 32GB",price:"\u20a6230,000",priceValue:230000,ram:"",storage:"32GB",condition:"used",category:"audio",img:"img/iPod+Touch+7G.jpeg"},
+      {brand:"Dell",name:"Latitude 3190 2-in-1 (UK used) Celeron, 4GB, 128GB",price:"\u20a6175,000",priceValue:175000,ram:"4GB",storage:"128GB",condition:"used",category:"laptop",img:"img/Dell+Latitude+3190.jpeg"},
+      {brand:"Samsung",name:"Galaxy Watch 4 (Open box, GPS-only) - \u20a6120,000",price:"\u20a6120,000",priceValue:120000,ram:"",storage:"",condition:"used",category:"watch",img:"img/Galaxy+Watch+4.jpeg"},
+      {brand:"Apple",name:"iPad Mini 4 (UK used) 128GB (SIM + eSIM support)",price:"\u20a6190,000",priceValue:190000,ram:"",storage:"128GB",condition:"used",category:"tablet",img:"img/iPad+Mini+4+128GB.jpeg"},
+      {brand:"Samsung",name:"Galaxy S10e (UK used) 8GB/256GB",price:"\u20a6210,000",priceValue:210000,ram:"8GB",storage:"256GB",condition:"used",category:"phone",img:"img/Galaxy+S10e+256GB.jpeg"},
+      {brand:"Google",name:"Pixel Fold (UK used) 12GB/512GB - Fresh as new",price:"\u20a6800,000",priceValue:800000,ram:"12GB",storage:"512GB",condition:"used",category:"phone",img:"img/Pixel+Fold+512GB.jpeg"},
+      {brand:"Samsung",name:"Galaxy Tab S10 Ultra (Open box, missing stylus) - \u20a61,400,000",price:"\u20a61,400,000",priceValue:1400000,ram:"",storage:"",condition:"new",category:"tablet",img:"img/Tab+S10+Ultra.jpeg"},
+      {brand:"LG",name:"LG G8X ThinQ (UK used) 6GB/128GB (Dual screen pouch)",price:"\u20a6320,000",priceValue:320000,ram:"6GB",storage:"128GB",condition:"used",category:"phone",img:"img/LG+G8X.jpeg"},
+      {brand:"Samsung",name:"S23 Ultra (US) 512GB - Unlocked - \u20a6890,000",price:"\u20a6890,000",priceValue:890000,ram:"12GB",storage:"512GB",condition:"new",category:"phone",img:"img/S23+Ultra+512GB.jpg"},
+      {brand:"Samsung",name:"S24 Ultra (US) 512GB - \u20a61,100,000",price:"\u20a61,100,000",priceValue:1100000,ram:"12GB",storage:"512GB",condition:"new",category:"phone",img:"img/S24+Ultra+512GB.jpeg"},
+      {brand:"Sony",name:"PS5 Digital Slim 30th Anniversary Edition 1TB - Brand New",price:"\u20a6790,000",priceValue:790000,ram:"",storage:"1TB",condition:"new",category:"console",img:"img/PS5+30th+Anniversary+1TB.jpeg"}
     ];
 
     // Populate filter options
@@ -364,6 +499,22 @@
     // small page reveal
     document.body.style.opacity=0;document.body.style.transition='opacity 300ms';setTimeout(()=>document.body.style.opacity=1,60);
   });
+ // Mobile nav toggle
+document.querySelector('.mobile-toggle').addEventListener('click', () => {
+  document.querySelector('.main-nav').classList.toggle('active');
+  document.querySelector('.header-ctas').classList.toggle('active');
+});
+
   </script>
+  <!-- Floating WhatsApp bubble (live, tappable) -->
+<button class="fab-wa pulse" aria-label="Chat with TobbIe Gadgets on WhatsApp" title="Chat with TobbIe Gadgets">
+  💬
+  <span class="dot" aria-hidden="true"></span>
+  <span class="typing" aria-hidden="true"><span></span><span></span><span></span></span>
+</button>
+
+<!-- Optional: small offscreen hint for keyboard users -->
+<span class="sr-only">Press the chat button to message TobbIe Gadgets on WhatsApp.</span>
+
 </body>
 </html>
